@@ -1,30 +1,80 @@
 ---
-title: "Pdf de experimento"
-author: "Nazareth Artigas"
+title: "Pdf de experimento para no equivocarme en el importante"
+author: "Nazareth Artigas C.I: 31.375.207
+Santiago López C.I: 30.330.479"
 date: "`r Sys.Date()`"
 output: pdf_document
 ---
-#introducción
 
-## Objetivo General
+# 1. Introducción
+En la actualidad, sectores como la Computación Cuántica, Blockchain y las Tecnologías Verdes están redefiniendo el mercado de trabajo global...
+
+# 2. Planteamiento del Problema
+
+En la última década, el mercado laboral global ha experimentado una transformación sin precedentes. Factores como la digitalización acelerada, la normalización del trabajo remoto y la demanda de habilidades técnicas específicas han redefinido cómo se valoran los puestos de trabajo. Ya no basta con mirar el "título del cargo"; la compensación económica ahora parece estar sujeta a una red compleja de variables interconectadas.
+
+¿Es el tamaño de la empresa un predictor fiable del sueldo? ¿Existe una penalización salarial por elegir la modalidad remota, o es ahora un estándar competitivo? ¿Qué tanto peso real tienen ciertas habilidades (skills) frente a la ubicación geográfica?. A pesar de la abundancia de ofertas de trabajo, existe una falta de claridad sobre cuáles son los verdaderos determinantes del salario en el mercado actual, por lo cual, este estudio busca aclarar esas dudas mediante la estadística descriptiva y el uso de la plataforma GitHub y lenguajes de programación conocidos como R y Python.
+
+# 3. Objetivos
+
+## 3.1 Objetivo General
+
 Analizar el panorama laboral de los sectores tecnológicos emergentes mediante estadística descriptiva para identificar las variables que más impactan en la oferta salarial y la demanda de talento.
 
-## R Markdown
+## 3.2 Objetivos Específicos
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+* Determinar el promedio, mediana y desviación estándar de los salarios por industria para identificar cuál es la más rentable.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+* Comparar las medias salariales entre puestos remotos y presenciales para verificar si existe una "penalización" o beneficio económico por la modalidad.
 
-```{r cars}
-summary(cars)
+* Identificar las ciudades con mayores ofertas de empleo y su nivel de remuneración promedio.
+
+* Clasificar las habilidades más solicitadas en cada sector y su frecuencia de aparición en las vacantes.
+
+* Evaluar si el tamaño de la empresa (Small, Medium, Large) influye significativamente en los rangos salariales ofrecidos.
+
+
+Se limpian los datos
+
+```{r, include=FALSE}
+# 1. Cargar la librería silenciosamente
+library(tidyverse)
+
+# 2. Leer el archivo usando comillas dobles
+# Asegúrate de que el nombre sea EXACTO al que ves en tu carpeta de archivos
+datos <- read_csv("10. Job y Skills.xlsx")
+
+# 3. Limpiar los nombres de las columnas automáticamente 
+# (Esto quita espacios y puntos raros en los títulos de las columnas)
+install.packages("janitor") # Ejecuta esto una vez si no la tienes
+library(janitor)
+datos <- datos %>% clean_names()
+
+# 4. Revisar si funcionó
+glimpse(datos)
 ```
 
-## Including Plots
+```{r, include=FALSE}
+# 1. Cargamos la librería para Excel
+library(readxl)
 
-You can also embed plots, for example:
+# 2. Intentamos leer el archivo (usa el nombre exacto que aparece en tu panel de Files)
+# Si le cambiaste el nombre a "dataset.xlsx", pon ese aquí.
+datos <- read_excel("10. Job y Skills.xlsx") 
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+# 3. Revisamos qué hay adentro
+head(datos)
+```
+```{r, include=FALSE}
+# Esto nos mostrará la estructura de las columnas y los primeros valores
+glimpse(datos)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r, include=FALSE}
+# 1. Ver cuántos valores faltantes hay en total
+sum(is.na(datos))
+
+# 2. Ver cuáles columnas tienen esos valores vacíos
+colSums(is.na(datos))
+```
+
