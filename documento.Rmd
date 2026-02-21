@@ -33,10 +33,9 @@ Analizar el panorama laboral de los sectores tecnológicos emergentes mediante e
 
 * Evaluar si el tamaño de la empresa (Small, Medium, Large) influye significativamente en los rangos salariales ofrecidos.
 
+#Limpieza de datos
 
-Se limpian los datos
-
-```{r, include=FALSE}
+```{r}
 # 1. Cargar la librería silenciosamente
 library(tidyverse)
 
@@ -54,7 +53,7 @@ datos <- datos %>% clean_names()
 glimpse(datos)
 ```
 
-```{r, include=FALSE}
+```{r}
 # 1. Cargamos la librería para Excel
 library(readxl)
 
@@ -65,12 +64,13 @@ datos <- read_excel("10. Job y Skills.xlsx")
 # 3. Revisamos qué hay adentro
 head(datos)
 ```
-```{r, include=FALSE}
+
+```{r}
 # Esto nos mostrará la estructura de las columnas y los primeros valores
 glimpse(datos)
 ```
 
-```{r, include=FALSE}
+```{r}
 # 1. Ver cuántos valores faltantes hay en total
 sum(is.na(datos))
 
