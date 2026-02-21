@@ -5,7 +5,7 @@ Santiago López C.I: 30.330.479"
 date: "`r Sys.Date()`"
 output: pdf_document
 ---
-# 2. Planteamiento del Problema
+# 2. Planteamiento del Problema.
 
 En la última década, el mercado laboral global ha experimentado una transformación sin precedentes. Factores como la digitalización acelerada, la normalización del trabajo remoto y la demanda de habilidades técnicas específicas han redefinido cómo se valoran los puestos de trabajo. Ya no basta con mirar el "título del cargo"; la compensación económica ahora parece estar sujeta a una red compleja de variables interconectadas.
 
