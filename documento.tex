@@ -1,0 +1,240 @@
+% --- INICIO DE PLANTILLA PERSONALIZADA ---
+\documentclass[oneside,11pt]{Latex/Classes/PhDthesisPSnPDF}
+
+% --- Paquetes Originales ---
+\usepackage{blindtext}
+\usepackage{actuarialangle} 
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{multirow, array}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{longtable}
+\usepackage{latexsym,amsmath,amssymb,amsfonts}
+\usepackage{enumitem}
+\usepackage{xparse}
+\usepackage{booktabs}
+\usepackage[round, sort, numbers]{natbib}  
+\usepackage{adjustbox}
+\usepackage[utf8]{inputenc}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+% Definición de colores
+\definecolor{miblue}{RGB}{68, 114, 196}
+
+% --- CAMBIO CRÍTICO 1: Usar \input para macros en el preámbulo ---
+% \include da problemas antes del begin document. \input es seguro.
+\input{Latex/Macros/MacroFile1}
+
+% --- Definiciones de seguridad (por si la clase falla al cargar alguna variable) ---
+\providecommand{\facultad}[1]{\def\lafacultad{#1}}
+\providecommand{\escudofacultad}[1]{\def\elescudo{#1}}
+\providecommand{\degree}[1]{\def\elgrado{#1}}
+\providecommand{\director}[1]{\def\eldirector{#1}}
+\providecommand{\lugar}[1]{\def\ellugar{#1}}
+\providecommand{\degreedate}[1]{\def\lafecha{#1}}
+
+% --- Configuración para bloques de código de R (Pandoc) ---
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                         DATOS (Conectados a RMarkdown)                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Analisis del Mercado de Videojuegos}
+\author{true \\ true}
+
+% Lógica para Facultad: Si la defines en el YAML la usa, si no, usa la default
+
+\facultad{Facultad de Ciencias Económicas y Sociales \\ Escuela de
+Estadistica y Ciencias Actuariales}
+  \escudofacultad{Latex/Classes/Escudos/faces}
+
+\degree{Computación I}
+\director{Prof.~Jesus Ochoa \\ Prof.~Oliver Triveño}
+\degreedate{Febrero 2026} 
+\lugar{Caracas}
+
+\portadatrue 
+
+% Metadatos PDF
+\keywords{}
+\subject{}
+
+% --- CORRECCIÓN PARA PANDOC NUEVO (Imágenes) ---
+\makeatletter
+\providecommand{\pandocbounded}[1]{#1}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                   DOCUMENTO                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                  PRÓLOGO                          %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frontmatter
+
+% Puedes agregar dedicatorias desde el YAML si quieres, o dejarlas fijas aquí
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                   ÍNDICES                         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\tableofcontents
+
+
+
+\cleardoublepage
+
+  \cleardoublepage       % Empieza en página derecha (estándar en tesis)
+  \chapter*{Resumen}     % Crea el título "Resumen" sin numeración (Capítulo *)
+  \addcontentsline{toc}{chapter}{Resumen} % (Opcional) Lo añade al índice
+  
+  En el presente informe se realiza un análisis exploratorio de los
+datos de ventas de videojuegos a nivel global. Se examinan las
+tendencias históricas, la predominancia de géneros y el desempeño por
+regiones (NA, EU, JP), aplicando técnicas estadísticas descriptivas y
+visualización de datos con
+R.             % Aquí se pega el texto que escribiste en el YAML
+  
+  \cleardoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                   CONTENIDO (El Corazón)          %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
+\def\baselinestretch{1.5}
+
+% --- CAMBIO CRÍTICO 2: Aquí RMarkdown inyecta todo tu texto ---
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\newpage
+
+\section{1. Introducción}\label{introducciuxf3n}
+
+\section{2. Planteamiento del
+Problema.}\label{planteamiento-del-problema.}
+
+En la última década, el mercado laboral global ha experimentado una
+transformación sin precedentes. Factores como la digitalización
+acelerada, la normalización del trabajo remoto y la demanda de
+habilidades técnicas específicas han redefinido cómo se valoran los
+puestos de trabajo. Ya no basta con mirar el ``título del cargo''; la
+compensación económica ahora parece estar sujeta a una red compleja de
+variables interconectadas.
+
+¿Es el tamaño de la empresa un predictor fiable del sueldo? ¿Existe una
+penalización salarial por elegir la modalidad remota, o es ahora un
+estándar competitivo? ¿Qué tanto peso real tienen ciertas habilidades
+(skills) frente a la ubicación geográfica?. A pesar de la abundancia de
+ofertas de trabajo, existe una falta de claridad sobre cuáles son los
+verdaderos determinantes del salario en el mercado actual, por lo cual,
+este estudio busca aclarar esas dudas mediante la estadística
+descriptiva y el uso de la plataforma GitHub y lenguajes de programación
+conocidos como R y Python.
+
+\section{3. Objetivos}\label{objetivos}
+
+\subsection{3.1 Objetivo General}\label{objetivo-general}
+
+Analizar el panorama laboral de los sectores tecnológicos emergentes
+mediante estadística descriptiva para identificar las variables que más
+impactan en la oferta salarial y la demanda de talento.
+
+\subsection{3.2 Objetivos Específicos}\label{objetivos-especuxedficos}
+
+\begin{itemize}
+\item
+  Determinar el promedio, mediana y desviación estándar de los salarios
+  por industria para identificar cuál es la más rentable.
+\item
+  Comparar las medias salariales entre puestos remotos y presenciales
+  para verificar si existe una ``penalización'' o beneficio económico
+  por la modalidad.
+\item
+  Identificar las ciudades con mayores ofertas de empleo y su nivel de
+  remuneración promedio.
+\item
+  Clasificar las habilidades más solicitadas en cada sector y su
+  frecuencia de aparición en las vacantes.
+\item
+  Evaluar si el tamaño de la empresa (Small, Medium, Large) influye
+  significativamente en los rangos salariales ofrecidos.
+\end{itemize}
+
+\section{4. Marco de Referencia}\label{marco-de-referencia}
+
+\subsection{4.1 Marco Teórico}\label{marco-teuxf3rico}
+
+\begin{itemize}
+\tightlist
+\item
+  Teoría del Capital Humano: Propone que el salario está directamente
+  relacionado con la productividad del trabajador, la cual se mide a
+  través de sus habilidades y educación.
+\item
+  Teoría de los Salarios Compensatorios: Sugiere que las características
+  no monetarias de un trabajo (como la modalidad remota o el tamaño de
+  la empresa) afectan el sueldo.
+\item
+  Segmentación del Mercado Laboral: Plantea que el mercado no es
+  uniforme. Variables como industry y company\_size crean ``segmentos''
+  donde las reglas de compensación cambian drásticamente.
+\end{itemize}
+
+\subsection{4.2 Marco Metodológico}\label{marco-metodoluxf3gico}
+
+\section{5. Enfoque y Tipo de
+Investigación}\label{enfoque-y-tipo-de-investigaciuxf3n}
+
+Tipo descriptivo, correlacional no experimental y de enfoque
+cuantitativo.
+
+\section{6. Fuente de Datos}\label{fuente-de-datos}
+
+Los datos a evaluar se encuentran alojados en el repositorio
+nazaartgs/Jobs\_and\_skills: Un estudio estadístico creado con R y
+python para analizar las habilidades requeridas en el mercado laboral de
+la tecnología el cual ya se encuentra depurado y listo para su revisión.
+
+\section{7. Período de Referencia}\label{peruxedodo-de-referencia}
+
+\section{8. Procesamiento y Análisis de
+Datos}\label{procesamiento-y-anuxe1lisis-de-datos}
+
+El análisis se realiza con \textbf{R} y las librerías \texttt{dplyr} y
+\texttt{ggplot2}. El proceso consta de: 1. \textbf{Limpieza de Datos:}
+Carga del dataset, manejo de valores atípicos o no válidos (ej. precios
+en cero, número de habitaciones irreal), y corrección de tipos de datos.
+2. \textbf{Análisis Descriptivo:} Cálculo de estadísticas resumen. 3.
+\textbf{Visualización:} Creación de gráficos para ilustrar
+distribuciones y relaciones. Se utiliza una paleta de colores
+consistente inspirada en ``La noche estrellada''. 4.
+\textbf{Tabulación:} Generación de tablas formateadas con \texttt{kable}
+y \texttt{kableExtra} para una presentación clara de los resultados.
+
+\#9. Resultados y Análisis
+
+\section{10. Análisis}\label{anuxe1lisis}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                   REFERENCIAS                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Mantenemos la estructura natbib de tu plantilla
+\renewcommand{\bibname}{Lista de Referencias}
+\bibliographystyle{apalike} 
+\bibliography{bibliografia.bib} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                   APÉNDICES                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
