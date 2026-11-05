@@ -121,6 +121,8 @@ El análisis se realiza con **R** y las librerías `dplyr` y `ggplot2`. El proce
 
 # 10. Análisis
 
+bxiuashiasciuhcdcuisdhc 
+
 
 # 11. Conclusiones
 
